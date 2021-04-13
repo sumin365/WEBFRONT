@@ -4,33 +4,227 @@
   <head>
     <title>Bit Lounge 건강음료</title>
     <meta http-equiv = " Content-type" content = "text/html;charset=UTF-8" />
-  </head>
+    <!--3.번째 방법-->
+    <link rel="stylesheet" href="./styles/style.css" />
+    <!-- 연습을 위해 Page CSS로 진행 -->
+    <style>
+      /* 구조 선택자: 형제 관계에서의 위치로 요소를 선택 */
+      /* class=menu인 요소의 자식 li 중 첫번째 형제 */
+      .menu > li:first-child {
+      /* 키워드 이용 색상 선택 */
+      /* background-color: lightgreen; */
+      background-color: rgba(0, 127, 0, 0.1); 
+    }
+    /* class=menu인 요소의 자식 li 중 두번째 형제 */
+    .menu > li:nth-child(2) {
+      /* background-color: lightblue; */
+      background-color: #0000FF20;  /* 16진수 방식의 설정 */
+    }
+    /* class=menu인 요소의 자식 li 중 뒤에서 두번째 형제 */
+    .menu > li:nth-last-child(2) {
+      /* background-color: plum; */
+      background-color: rgba(127, 0, 127, 0.1);
+    }
+    /* class=menu인 요소의 자식 li 중에서 마지막 형재 */
+    .menu > li:last-child {
+      /* background-color:pink; */
+      /* background-color: #FF000022; */
+      background-color: #F002;  /* = #FF000022  */
+    }
+
+    /* class=beverage 요소의 자식 h2  */
+    .beverage > h2 {
+      /* 브라우저의 기본 폰트 사이즈는 16px */
+      /* 절대 단위 px: 화면에 표시되는 점 한개 */
+      /* font-size: 24px; */
+      /* 상대 단위 %: 비율 백분율 */
+      /* font-size: 150%; */
+      /* 상대 단위 em: 배율 */
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .beverage > p {
+      font-size: 1.2em; /* 16px의 1.2배 = 120% */
+      font-weight: 400; /* = normal */
+    }
+
+    body {
+      /* 표시할 글꼴의 후보군을 나열 
+        앞쪽 폰트부터 적용되고 없으면 뒤쪽 후보 글꼴이 데체, 
+        최종적으로 일반 글꼴(serif, sans-serif, monospace)을
+        명시 */
+      font-family: '맑은 고딕', 돋움, sans-serif;
+    }
+
+    .feature {
+      /* test-decoration 속성: 선으로 요소를 꾸미는 속성 */
+      /* none, line-through, underline, overline 등 */
+      text-decoration: underline;
+    }
+
+
+    /* border 속성: 요소의 테두리를 꾸미는 속성 */
+    .beverage {
+      /* 개별 속성을 적용할 때는 접미사 붙임 */
+      /* border-width: 3px;
+      border-style: dashed;
+      border-color: gray; */
+
+      /* 일괄 적용: width style color 순 */
+      border: 3px dashed gray;
+    }
+    .beverage img {
+      /* 값이 1개: 전 방향 적용 */
+      padding: 10px;  
+    }
+    .beverage h2 {
+      /* 값이 2개: 위-아래 왼쪽-오른쪽 */
+      margin:0 10px;
+    }
+    .beverage p {
+      /* 값이 4개: 위 오른쪽 아래 왼쪽 순 */
+      margin: 20px 10px 10px 10px;
+    }
+
+    .seller img {
+      border-radius: 20px;  /* 네 귀퉁이 모두에 둥글기 적용 */
+
+      border-radius: 10px 20px 30px 40px; 
+      /* 좌측위 우측위 오른쪽 아래 왼쪽 아래 순: 시계 방향 */
+
+      border-top-left-radius: 100px; /* 특정 방향 접미사 이용 */
+
+      border-radius: 50%; /* 비율에 의한 모서리 다듬기 */
+
+      /* display 속성: 공간 점유 방식을 변경 
+        none, block, inline, inline-block
+        none -> 공간 자체를 점유하지 않음
+        */
+      /* display: none;   */
+      /* visibility 속성: 표시 여부만 결정
+        visible, hidden
+        공간은 그대로 점유 */
+      /* visibility: hidden */
+    }
+
+    .menu > li {
+      float: left;
+      width: 100px;
+      height: 25px;
+      list-style-type: none;
+      text-align: center;
+      margin-bottom: 10px;
+      margin-right: 5px;
+    }
+
+    .beverage.green img, .beverage.purple img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .beverage.blue img, .beverage.red img {
+      float: right;
+      margin-left: 10px;
+    }
+    
+  </style>
+</head>
 
   <body>
+    <header><!--27/70 사이트 전체 혹은 기사의 헤더 정보-->
     <h1>건강 음료</h1>
-    <h2>Green Tea Cooler</h2>
-    <p>green.jpg"</p>
-    <p>Chock full of vitamins and minerals, this elixir combines the healthful benefits
-       of green tea with a twist of chamomile blossoms and ginger root.</p>
-     
-     <h2>Raspberry Ice Concentration</h2>  
-     <p>lightblue.jpg</p>
-     <p>Combining raspberry juice with lemon grass, citrus peel and rosehips,
-        this icy drink will make your mind feel clear and crisp.</p>
-     
-     <h2>Blueberry Bliss Elixi </h2>  
-     <p>blue.jpg"</p>  
-     <p> Blueberries and cherry essence mixed into a base of elderflower 
-       herb tea will put you in a relaxed state of bliss in no time.</p>
+    </header> 
 
-     <h2>Cranberry Antioxidant Blast</h2>  
-     <p> red.jpg"</p>  
-     <p> Wake up to the flavors of cranberry
-        and hibiscus in this vitamin C rich elixir.
-     </p>
-     <p>문단 :
-      [링크:메인 페이지]메인으로 돌아가기[/링크]</p>
-  </body>
+  <nav>
+    <!-- nav: 메뉴 등 사이트 네비게이션 관련 시맨틱 태그-->
+    <!--메뉴만들어보자-->
+    <ul class = "menu"> <!--ul: 순서 없는 리스트-->
+      <li><a href="#green">Green</a> </li> <!-- id로 링크 id에 링크를 걸 수가 있다. 해당위치로 갈 수 있다. http://아이피주소/경로/파일명#id명 -->
+      <li><a href="#blue">Blue</a></li>
+      <li><a href="#purple">Purple</a></li>
+      <li><a href="#red">Red</a></li>
+    </ul>
+ 
+    <ol> <!--ol: 순서 있는 리스트--> 
+      <li>green</li>
+      <li>lightblue</li>
+      <li>blue</li>
+      <li>red</li>
+    </ol>
+  </nav>
+
+  <article> <!--article: 실제 컨텐츠를 표시하는 시멘틱 태그-->
+
+    <!--    검색엔진이 article 집중적으로 봄-->
+    <!-- 시맨틱 태그는 div의 일종이지만, 좀더 구체적인 의미를 가지는 공간 점유 태그 -->
+    <div class = "seller">
+      <img src = "./images/Penguins.jpg" alt = "Seller"/>
+    </div>
+
+
+     <!-- 38-40/70 id 속성: HTML 내에서 사용되는 유일 식별자 
+                   id는 #을 사용하여 선택 //id에 링크를 걸 수가 있다. 해당위치로 갈 수 있다. http://아이피주소/경로/파일명#id명 
+                   class는 .을 사용하여 선택 -->
+      <section id="green"><!-- section: 내부 섹션을 구분하는 시맨틱 태그 -->
+        <!-- 클래스는 여러 요소가 가질 수 있고,
+          한 요소가 여러 개의 클래스를 가질 수 있다
+           class는 .을 사용하여 블러올수있다. -->
+        <div class="green beverage">
+        <h2>Green Tea Cooler</h2>
+        <!--img태그: 
+          src: 이미지 위치         -상대경로를 이용하자  . 또는 생략 : 현재 디렉토리 
+                                                              .. : 부모 디렉토리
+          alt: 이미지 설명 (텍스트)	-->
+        
+        <img src="./images/green.jpg" alt = "Green Tea Cooler" />
+        <img src="images/green.jpg" alt = "Green Tea Cooler" />
+        <p>Chock full of  <span class="feature">vitamins and minerals</span>, this elixir combines the healthful benefits
+          of green tea with a twist of chamomile blossoms and ginger root.</p>
+        </div>
+    </section>
+
+    <section id="blue">  <!--section : 내부 섹션을 구분하는 시멘틱 태그 .사용자입장에서는 아무의미 없지만 검색엔진은 중요한 것이구나-->
+      <div class="beverage blue">
+    
+        <h2>Raspberry Ice Concentration</h2>  
+        <img src="images/lightblue.jpg" alt = "Raspberry Ice Concentration" />
+        <p>Combining raspberry juice with lemon grass, citrus peel and rosehips,
+            this icy drink will make your mind feel clear and crisp.</p>
+          </div>
+    </section> 
+
+    <section id="purple">
+      <div class="beverage purple">
+        <h2>Blueberry Bliss Elixi </h2>  
+        <img src="images/blue.jpg" alt = "Blueberry Bliss Elixi" />
+        <p> Blueberries and cherry essence mixed into a base of elderflower 
+          herb tea will put you in a relaxed state of bliss in no time.</p>
+        </div>
+    </section>
+
+    <section id="red">
+      <div class="beverage red">
+        <h2>Cranberry Antioxidant Blast</h2>  
+        <img src="images/red.jpg" alt = "Cranberry Antioxidant Blast" />
+        <p> Wake up to the flavors of cranberry
+            and hibiscus in this vitamin C rich elixir.
+        </p>
+      </div>
+    </section>
+  </article>
+
+    <nav>
+        <!--내부링크니까 바로 쓰면 됨-->
+        <p>문단 :
+          <a href= "index.html"> 메인으로 돌아가기</a>
+        </p>
+    </nav>
+    
+    <!--footer: 아래 참조처럼 광고처럼 들어간다. -->
+    <footer>&copy; Bit Lounge, 2021</footer>
+    </body>
+
 
 </html>
 

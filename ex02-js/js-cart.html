@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <title>JS Cart</title>
+        <style>
+            #list li {
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Shopping List</h1>
+        </div>
+        <div id="cart-list">
+            <ul id="list">
+                <li>무</li>
+                <li>배추</li>
+                <li>쪽파</li>
+                <li>고춧가루</li>
+            </ul>
+        </div>
+        <div id="cart-input">
+            <input id="item"><button id="btn-add">추가</button>
+        </div>
+        <div id="footer">
+            &copy;Bit Academy
+        </div>
+    </body>
+<script>
+
+    //  #btn-add click 처리기 -86,87줄에 있는 내용 추가하기 
+    function addItem(event) {
+        //  추가할 내용을 input#item에서 찾아온다
+        var itemInput = document.getElementById("item");
+        var item = itemInput.value.trim();  //  좌우 공백 제거
+        console.log("추가할 아이템:", item);
+
+        if (item.length > 0) {//18-19/24 -요소의 동적생성및 추가- input#item에 입력되면->ul#list의 li에 appendchild해줘야함
+            //1.  부모 요소를 선택
+            var container = document.getElementById("list"); 
+            // 2. 새 노드 생성
+            var itemNode = document.createElement("li");
+            // 3. 내부 속성과 콘텐츠 설정
+            itemNode.innerText = item;
+
+            // 6. 노드 내부에 삭제 버튼 - 1.delBtn 2.toolbar 3.itemNode 에 연결시켜야함
+            var toolbar = document.createElement("div");
+            toolbar.style.display = "inline";  //삭제버튼이 div니까 block상태 그래서 inline으로 바꾸자
+            var delBtn = document.createElement("button");
+            delBtn.innerText = "삭제";  //버튼에 내부 컨텍츠 (내용)을 채워주자
+            delBtn.style.float = "right";  //삭제버튼을 오른쪽으로 배치시키자
+
+            toolbar.appendChild(delBtn); //- 1.delBtn 2.toolbar 3.itemNode 에 연결시켜야함
+            itemNode.appendChild(toolbar);
+
+            // 7. 삭제 버튼에 이벤트 리스너를 부착 -ppt4번 /19/24꼭보기 -삭제할 부모는 ul임. ul로부터 떼어나야함
+            delBtn.addEventListener("click", function(event) {
+                console.log(event.target); //이벤트할 타켓target은 button이야. 
+                //7- 1. 삭제할 요소
+                var removeItem = event.target.parentNode.parentNode; //target의 부모의 부모가 삭제대상이어야함
+                //7- 2.  삭제할 요소의 부모
+                var parent = removeItem.parentNode;
+
+                //7- 3. 부모로부터 분리 - ul로부터 li 제거
+                parent.removeChild(removeItem);
+            });
+            //4. 새노드인  itemNode를 부모에  추가
+            container.appendChild(itemNode);
+            // 5. input#item 값을 초기화 -입력창에 추가한 내용없어지고  focus 되어있게 함
+            itemInput.value = "";
+            itemInput.focus();
+        }
+    }
+
+    // 0. 초기화: load 이벤트 처리
+    window.addEventListener("load", function(event) {
+        // 8. 시작시 list 모두 비우기
+        var cartItem = document.querySelectorAll("#list > li"); //li자식들 모두 삭제하자  ??????????????querySelectorAll와 querySelector?????
+        for (var i = 0; i < cartItem.length; i++) {
+            //  부모로부터 분리
+            cartItem[i].parentNode.removeChild(cartItem[i]);
+        }
+
+
+//18-20/24??????????????????????????????????????????????????????????????????????????
+//앞에 리스트에 삽입하고자 할떄 
+//1.자식이 없을떄 append 
+if(container.hasChildNodes() && container.children.length >0 ){
+//삽입가능 
+//부모확인 -> 새 노드 생성 -> 삽입할 위치
+document.insertBefore(itemNode, container )
+}
+console.log(container.children);
+if (container.hasChildNodes()){
+    //2. 자식이 있을떄 삽입가능
+}
+
+
+
+        //  추가 버튼 button#btn-add 에 이벤트 부착
+        document.getElementById("btn-add")
+            .addEventListener("click", addItem);
+    }); //phone shop은 j query로 활용 cart는 vjs로 활용해보자라는 말이지?????????????????????????????????????????????
+</script>
+</html>

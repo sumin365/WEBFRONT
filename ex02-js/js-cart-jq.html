@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <title>JS Cart</title>
+        <style>
+            #list li {
+                height: 30px;
+            }
+        </style>
+    <!-- 5/4/34  jQuery Script 불러오기 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" 
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+    crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Shopping List</h1>
+        </div>
+        <div id="cart-list">
+            <ul id="list">
+                <li>무</li>
+                <li>배추</li>
+                <li>쪽파</li>
+                <li>고춧가루</li>
+            </ul>
+        </div>
+        <div id="cart-input">
+            <input id="item"><button id="btn-add">추가</button>
+        </div>
+        <div id="footer">
+            &copy;Bit Academy
+        </div>
+    </body>
+<script>
+
+    //  #btn-add click 처리기 -86,87줄에 있는 내용 추가하기 
+    function addItem(event) {
+        //  추가할 내용을 input#item에서 찾아온다
+        // var itemInput = document.getElementById("item");
+        // var item = itemInput.value.trim();  //  좌우 공백 제거
+        // console.log("추가할 아이템:", item);
+        var itemInput = $("#item");
+        var item = itemInput.val().trim();  //  val() -> value 속성
+        console.log("추가할 아이템:", item);
+
+        if (item.length > 0) {//18-19/24 -요소의 동적생성및 추가- input#item에 입력되면->ul#list의 li에 appendchild해줘야함
+            //1.  부모 요소를 id로 선택
+            // var container = document.getElementById("list"); 
+            var container = $("#list");
+            // 2. 새 노드 생성  ->간단히 $로 하면된다.  -> $(htmlString)
+            // var itemNode = document.createElement("li");
+            var itemNode = $("<li>");
+            // 3. 내부 속성과 콘텐츠 설정
+            // itemNode.innerText = item;
+            itemNode.text(item);    //  innerText 속성
+
+            // 6. 노드 내부에 삭제 버튼 - 1.delBtn 2.toolbar 3.itemNode 에 연결시켜야함
+            // var toolbar = document.createElement("div");
+            // toolbar.style.display = "inline";  //삭제버튼이 div니까 block상태 그래서 inline으로 바꾸자
+            // var delBtn = document.createElement("button");
+            // delBtn.innerText = "삭제";  //버튼에 내부 컨텍츠 (내용)을 채워주자
+            // delBtn.style.float = "right";  //삭제버튼을 오른쪽으로 배치시키자
+            // toolbar.appendChild(delBtn); //- 1.delBtn 2.toolbar 3.itemNode 에 연결시켜야함
+            // itemNode.appendChild(toolbar);
+            var toolbar = $("<div>");
+            toolbar.css("display", "inline");
+
+            var delBtn = $("<button>");
+            delBtn.text("삭제")
+                  .css("float", "right");  // 연달아 jquery가 나와서 연속적으로 메서드사용가능.메서드체이닝기법
+
+            toolbar.append(delBtn); //jquery은 그냥append
+            itemNode.append(toolbar);
+
+            // 7. 삭제 버튼에 이벤트 리스너를 부착 -ppt4번 /19/24꼭보기 -삭제할 부모는 ul임. ul로부터 떼어나야함
+            // delBtn.addEventListener("click", function(event) {
+            //     console.log(event.target); //이벤트할 타켓target은 button이야. 
+                delBtn.on("click", function(event) {
+                console.log(event.target);
+                //7- 1. 삭제할 요소
+                // var removeItem = event.target.parentNode.parentNode; //target의 부모의 부모가 삭제대상이어야함
+                var removeItem = $(this.parentNode.parentNode);    //  jQuery로 포장
+                //7- 2.  삭제할 요소의 부모
+                // var parent = removeItem.parentNode;
+                //jQuery는 부모찾을 필요없다.
+                
+                //7- 3. 부모로부터 분리 - ul로부터 li 제거
+                // parent.removeChild(removeItem);
+                removeItem.remove();
+            });
+            
+            //4. 새노드인  itemNode를 부모에  추가
+            // container.appendChild(itemNode);
+            container.append(itemNode);
+            // 5. input#item 값을 초기화 -입력창에 추가한 내용없어지고  focus 되어있게 함
+            // itemInput.value = "";
+            // itemInput.focus();
+            itemInput.val("");
+            itemInput.focus(); 
+        }
+    }
+
+
+    // 0. 05/07/34 초기화: load 이벤트 처리
+    
+    $(document).ready(function(event) {
+        //  시작시 list 모두 비우기
+        var cartItem = $("#list > li");
+
+        //  루프
+        //vjs에서 요소삭제: 1.부모찾기 2.자신찾기 3.부모로부터 분리
+        // jQuery 요소삭제:  부모를 찾지 않아도 분리할 수 있다
+        cartItem.each(function(index, item) {   //  jQuery 요소 루프 돌리기
+            item.remove();  //  부모를 찾지 않아도 분리할 수 있다
+        });
+
+        $("#btn-add").on("click", addItem); //  추가 버튼 button#btn-add 에 이벤트 부착
+    });
+
+
+  
+
+
+</script>
+</html>
